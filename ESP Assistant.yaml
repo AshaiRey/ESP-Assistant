@@ -1,4 +1,7 @@
 # ESP Voice Assistant
+# version: 6 - 31 Jul 2024
+# - Select on timers limites to number of timers
+# - display remaining time for selected timer
 # version: 5 - 30 Jul 2024
 # - code cleaning
 # - Timer canceling
@@ -148,6 +151,9 @@ globals:
     restore_value: false
   - id: global_is_timer
     type: bool
+    restore_value: false
+  - id: timer_id
+    type: int
     restore_value: false
     
 
@@ -395,18 +401,6 @@ script:
           effect: "Fast Pulse"
 
 
-  - id: fetch_first_active_timer
-    then:
-      - lambda: |
-          const auto timers = id(va).get_timers();
-          auto output_timer = timers.begin()->second;
-          for (auto &iterable_timer : timers) {
-            if (iterable_timer.second.is_active && iterable_timer.second.seconds_left <= output_timer.seconds_left) {
-              output_timer = iterable_timer.second;
-            }
-          }
-          id(global_first_active_timer) = output_timer;
-
   - id: check_if_timers_active
     then:
       - lambda: |
@@ -420,17 +414,7 @@ script:
             }
           }
           id(global_is_timer_active) = output;
-  - id: fetch_first_timer
-    then:
-      - lambda: |
-          const auto timers = id(va).get_timers();
-          auto output_timer = timers.begin()->second;
-          for (auto &iterable_timer : timers) {
-            if (iterable_timer.second.seconds_left <= output_timer.seconds_left) {
-              output_timer = iterable_timer.second;
-            }
-          }
-          id(global_first_timer) = output_timer;
+  
   - id: check_if_timers
     then:
       - lambda: |
@@ -440,24 +424,29 @@ script:
             output = true;
           }
           id(global_is_timer) = output;
-
-
-  - id: timer_timeline
+ 
+  - id: timer_by_index
     then:
       - lambda: |
-          id(check_if_timers_active).execute();
-          id(check_if_timers).execute();
-          if (id(global_is_timer_active)){
-            id(fetch_first_active_timer).execute();
-          } else if (id(global_is_timer)){
-            id(fetch_first_timer).execute();
+          const auto timers = id(va).get_timers();
+          auto timer_id = 0;
+          if (timers.size() > 0) {
+            for (auto &iterable_timer : timers) {
+              if(iterable_timer.second.is_active) {
+                if(timer_id == id(timer_list).active_index() ) {
+                   id(global_first_active_timer) = iterable_timer.second;
+                }
+               }
+               timer_id++;
+            }
           }
+
   - id: active_timer_widget
     then:
       - lambda: |
           id(check_if_timers_active).execute();
           if (id(global_is_timer_active)){
-            id(fetch_first_active_timer).execute();
+            id(timer_by_index).execute();
             int hours_left = floor(id(global_first_active_timer).seconds_left / 3600);
             int minutes_left = floor((id(global_first_active_timer).seconds_left - hours_left * 3600) / 60);
             int seconds_left = id(global_first_active_timer).seconds_left - hours_left * 3600 - minutes_left * 60 ;
@@ -473,6 +462,13 @@ script:
             }
             id(text_timer).publish_state(display_string.c_str());
           }
+          else {
+            id(text_timer).publish_state("--:--");
+          }
+
+button:
+  - platform: template
+    name: "Delete timer"
 
 
 select: # Wake word engine location
@@ -518,7 +514,22 @@ select: # Wake word engine location
                         switch.is_off: mute
                       then:
                         - micro_wake_word.start
-
+  - platform: template
+    name: Show timer
+    id: timer_list
+    icon: "mdi:account-voice"
+    optimistic: true
+    restore_value: true
+    options:
+      - "Timer 1"
+      - "Timer 2"
+      - "Timer 3"
+      - "Timer 4"
+    initial_option: "Timer 1"
+    on_value:
+      - logger.log: 
+          format: "# of timer: %d - Index: %d"
+          args: ["id(va).get_timers().size()", "i"]      
 
 # Declaration of the switch that will be used to turn on or off (mute) or voice assistant
 switch: # mute, timer_ringing
@@ -656,6 +667,7 @@ voice_assistant:
   # In any case: Set the correct phase and run the script to refresh the LED status
   on_client_connected:
     - lambda: id(init_in_progress) = false; 
+    - lambda: id(text_timer).publish_state("--:--");
     - if:
         condition:
           switch.is_off: mute
@@ -737,8 +749,19 @@ voice_assistant:
     - lambda: id(text_timer).publish_state("--:--");
   on_timer_tick:
     # This only gets activated when a timer is active
-    - script.execute: timer_timeline
+    #- script.execute: timer_timeline
     - script.execute: active_timer_widget
+    - if:
+        condition:
+          lambda: |
+             int t1 = id(va).get_timers().size();
+             const auto t2 = id(timer_list).active_index();
+             const unsigned int val = t2.value();
+             return ( t1 < (val + 1) );
+        then:  
+          - select.first: timer_list
+#          - logger.log: "FIRST SELECTED !!!!!!"
+
   on_timer_finished:
     - script.execute: stop_voice_assistant
     - switch.turn_on: timer_ringing
