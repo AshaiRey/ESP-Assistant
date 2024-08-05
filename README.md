@@ -8,12 +8,12 @@ _* There is one small dependency in the code if you want a sound when a timer is
 **Hardware needed**
 - CPU: ESP32-S3 N16R8
 - Mic: INMP441
-- Amp: MAX9835A
+- Amp: MAX98357A
 - Led: 3 WS2812B leds.
 - Speaker: 40mm Headset Driver Hifi Headphone Speaker Unit 32ohm [AliExpress](https://www.aliexpress.com/item/1005001352277084.html)
 
 I've include the schematic that I used and placed it in the media folder. It follows to general approach for this setup but i had to use 2 diffentent pins to get it working reliably.
-(Schematic is based on the one found [here](https://smarthomecircle.com/How-to-setup-on-device-wake-word-for-voice-assistant-home-assistant#circuit-diagram-for-esp32-s3-with-inmp441-microphone--max98357a-audio-amplifier)
+Schematic is based on the one found [here](https://smarthomecircle.com/How-to-setup-on-device-wake-word-for-voice-assistant-home-assistant#circuit-diagram-for-esp32-s3-with-inmp441-microphone--max98357a-audio-amplifier)
 
 **Requirements**
 - Home Assistant
