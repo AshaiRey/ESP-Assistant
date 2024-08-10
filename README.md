@@ -50,6 +50,8 @@ This thin wood let the light shine through without a problem.
 
 ![VoicePuck-white](https://github.com/user-attachments/assets/48c8b008-5497-4cdd-bbc0-d8b4e1e2929a)
 
+![VoicePuck-silver](https://github.com/AshaiRey/ESP-Assistant/blob/main/media/VoicePuck-double.jpg]
+
 The entities that are available in Home Assistant
 
 ![HA-device](https://github.com/user-attachments/assets/dca3b294-eca2-4e0a-87b3-f8b0228a2dab)
