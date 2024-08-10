@@ -42,7 +42,8 @@ I've include the 3D print files for the body and the cover. I used a resin print
 ![VoicePuck-bottom](https://github.com/user-attachments/assets/b499539f-c70a-4596-942c-3c0e93b9055e)
 
 For comparison this is a Voice puck with with a dark cover which is perforated to let the light shine through.
-Left the Google home version, right the ESP Assistand
+Left the Google home version, right the ESP Assistant
+
 ![VoicePuck-GoogleHome](https://github.com/user-attachments/assets/5bf028dc-2269-41cd-9bdd-1a9a011f9e1a)
 
 You can choose your cover freely. This one has a light wooden vineer cover. 
@@ -50,6 +51,7 @@ This thin wood let the light shine through without a problem.
 
 ![VoicePuck-white](https://github.com/user-attachments/assets/48c8b008-5497-4cdd-bbc0-d8b4e1e2929a)
 
+![20240810_091030](https://github.com/user-attachments/assets/dab989f1-f182-4e96-a11f-3fbb608e9481)
 
 The entities that are available in Home Assistant
 
