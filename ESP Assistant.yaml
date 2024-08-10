@@ -1,6 +1,6 @@
 # ESP Voice Assistant
-# version: 6 - 31 Jul 2024
-# - Select on timers limites to number of timers
+# version: 6 - 31 Jul 2024 (v 1.0.0)
+# - Select on timers limits to number of timers
 # - display remaining time for selected timer
 # version: 5 - 30 Jul 2024
 # - code cleaning
@@ -20,8 +20,8 @@ substitutions:
   name: "esp-assistant"
   friendly_name: ESP Assistant
   
-  micro_wake_word_model: okay_nabu
-  timer_alarm_sound: "sounds/timer_finished.wav"
+  micro_wake_word_model: okay_nabu # Other options are: hey_jarvis or alexa
+  timer_alarm_sound: "sounds/timer_finished.wav"  # in the esphome/sounds folder
   
   # Phases of the Voice Assistant
   # IDLE: The voice assistant is ready to be triggered by a wake-word
@@ -52,8 +52,8 @@ esphome:
   platformio_options:
     board_build.flash_mode: dio
   project:
-    name: esp.assistant
-    version: '2.0'    
+    name: AA_van_Zoelen.VoicePuck
+    version: '1.0.0'    
   # Automation to perform every time the device boots 
   on_boot:
       priority: 600
@@ -647,7 +647,7 @@ external_components:
 # Loading the external file(s)
 file:
   - id: timer_finished_wave_file
-    file: ${timer_alarm_sound} #"sounds/timer_finished.wav" in the esphome folder
+    file: ${timer_alarm_sound} #"sounds/timer_finished.wav" in the esphome/sounds folder
 
 # This is the declaration of our voice assistant
 # It references the microphone and speaker declared above.
@@ -657,9 +657,9 @@ voice_assistant:
   speaker: external_speaker
   use_wake_word: true
   # You may have to test a few values for the 3 parameters below
-  noise_suppression_level: 4
-  auto_gain: 31dBFS
-  volume_multiplier: 8.0
+  noise_suppression_level: 4  # Between 0 and 4 inclusive. Defaults to 0 (disabled).
+  auto_gain: 31dBFS           # Between 0dBFS and 31dBFS inclusive. Defaults to 0 (disabled).
+  volume_multiplier: 8.0      # Must be larger than 0. Defaults to 1 (disabled).
 
   # When the voice assistant connects to HA:
   # Set init_in_progress to false (Initialization is over).
@@ -760,6 +760,7 @@ voice_assistant:
              return ( t1 < (val + 1) );
         then:  
           - select.first: timer_list
+#          - logger.log: "FIRST SELECTED !!!!!!"
 
   on_timer_finished:
     - script.execute: stop_voice_assistant
