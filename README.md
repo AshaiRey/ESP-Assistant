@@ -51,7 +51,7 @@ This thin wood let the light shine through without a problem.
 ![VoicePuck-white](https://github.com/user-attachments/assets/48c8b008-5497-4cdd-bbc0-d8b4e1e2929a)
 
 
-![VoicePuck-silver](https://github.com/user-attachments/assets/48c8b008-5497-4cdd-bbc0-d8b4e1e2929a)
+![VoicePuck-double](https://github.com/user-attachments/assets/48c8b008-5497-4cdd-bbc0-d8b4e1e2929a)
 
 The entities that are available in Home Assistant
 
