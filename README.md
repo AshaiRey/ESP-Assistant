@@ -36,7 +36,9 @@ And don't forget to create your secret SSID een password for the wifi section
   password: !secret wifi_password
 
   
-I've include the 3D print files for the body and the cover. I used a resin printer for these
+I've include the 3D print files for the body and the cover. I used a resin printer for these.
+Version 2 has a bit better wire management.
+
 ![VoicePuck-top](https://github.com/user-attachments/assets/860735a3-23ba-4d62-90ca-2ab0160d5e5d)
 
 ![VoicePuck-bottom](https://github.com/user-attachments/assets/b499539f-c70a-4596-942c-3c0e93b9055e)
