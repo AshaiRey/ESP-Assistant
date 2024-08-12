@@ -55,6 +55,13 @@ This thin wood let the light shine through without a problem.
 
 ![20240810_091030](https://github.com/user-attachments/assets/dab989f1-f182-4e96-a11f-3fbb608e9481)
 
+
 The entities that are available in Home Assistant
 
 ![HA-device](https://github.com/user-attachments/assets/dca3b294-eca2-4e0a-87b3-f8b0228a2dab)
+
+
+**The troubleshooting part**
+I had one small issue that was simply my own fault. The speaker and LED's didn't work. I used the 5V pin to get my 5V from but i forgot the add a small solder blob to make the 5V pin an output pin. So make sure you close these pads with a bit of solder
+
+![solderpad](https://github.com/user-attachments/assets/013e3fdf-9ada-4561-8fd3-8d0e5fba6034)
