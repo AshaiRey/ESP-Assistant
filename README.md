@@ -63,6 +63,6 @@ The entities that are available in Home Assistant
 
 **The troubleshooting part**
 
-I had one small issue that was simply my own fault. The speaker and LED's didn't work. I used the 5V pin to get my 5V from but i forgot the add a small solder blob to make the 5V pin an output pin. So make sure you close these pads with a bit of solder
+I had one small issue that was simply my own fault. The speaker and LED's didn't work. I used the 5V pin to get my 5V from but I forgot to add a small solder blob to make the 5V pin an output pin. So make sure you close these pads with a bit of solder
 
 ![solderpad](https://github.com/user-attachments/assets/013e3fdf-9ada-4561-8fd3-8d0e5fba6034)
