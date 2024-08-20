@@ -6,6 +6,7 @@ The main goal of this project was to create a voice assistant (VA) for HA that i
 _* There is one small dependency in the code if you want a sound when a timer is finished. This dependecy is only there when compiling. A future release may solve this. For now this isn't a big show stopper_
 
 **UPDATE Version 2**
+
 While version 1 works it still suffered from stalls from time to time.
 The ESP32-S3-BOX version that I also have showed to be far more stable. Because of this I abandoned to 'no external files' concept and went for the full blown version and took the ESP32-S3-BOX version as start. I stripped everything that deals with the screen and the buttons on the box. I've added my own sensors and other tools. Things I like to see and control in HA such as diagnostics, request and response sensors and timer info. The hardware stayed the same so this installs directly on the VoicePuck. This version is a lot heavier when compiling. My advise is to start with cleaning your build files and start compiling. When it fails just restart again. File locks will occure but they will be cleared. Files that are already compiled will be skipped so the processor load on lower end systems will handle in the end a full compile.
 
