@@ -61,6 +61,7 @@ This thin wood let the light shine through without a problem.
 
 ![20240810_091030](https://github.com/user-attachments/assets/dab989f1-f182-4e96-a11f-3fbb608e9481)
 
+[Infinity VoicePuck](https://www.youtube.com/shorts/t8ANTnrit_I)
 
 The entities that are available in Home Assistant
 
